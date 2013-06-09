@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+    <servlet>
+        <servlet-name>default</servlet-name>
+        <init-param>
+            <param-name>useFileMappedBuffer</param-name>
+            <param-value>false</param-value>
+        </init-param>
+    </servlet>
+
+    <!--<servlet>-->
+        <!--<servlet-name>Neo4jProxy</servlet-name>-->
+        <!--<servlet-class>org.mortbay.proxy.AsyncProxyServlet$Transparent</servlet-class>-->
+        <!--<load-on-startup>1</load-on-startup>-->
+        <!--<init-param>-->
+            <!--<param-name>ProxyTo</param-name><param-value>http://5673cbad6.hosted.neo4j.org:7387</param-value>-->
+        <!--</init-param>-->
+        <!--<init-param>-->
+            <!--<param-name>Prefix</param-name><param-value>/db/data</param-value>-->
+        <!--</init-param>-->
+    <!--</servlet>-->
+
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>Neo4jProxy</servlet-name>-->
+        <!--<url-pattern>/db/data/*</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <servlet>
+        <servlet-name>neo</servlet-name>
+        <servlet-class>org.mitre.dsmiley.httpproxy.ProxyServlet</servlet-class>
+        <init-param>
+            <param-name>targetUri</param-name>
+            <param-value>http://8d7b3131a:ad1963eb7@5673cbad6.hosted.neo4j.org:7387/db/data</param-value>
+        </init-param>
+        <init-param>
+            <param-name>log</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>neo</servlet-name>
+        <url-pattern>/db/data/*</url-pattern>
+    </servlet-mapping>
+</web-app>

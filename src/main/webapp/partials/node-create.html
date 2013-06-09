@@ -1,0 +1,8 @@
+<h3>Create a new node</h3>
+
+<form>
+    <p>Name: <input ng-model="node.name"></p>
+    <input type="button" ng-click="create(node)" value="Create"/>
+</form>
+
+<pre>{{ newNode | json }}</pre>

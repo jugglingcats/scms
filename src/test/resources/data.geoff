@@ -1,0 +1,3 @@
+(P) {"type": "Feature", "title": "Player"}
+(PSS) {"type": "Feature", "title": "Player Subtitle Support"}
+(P)-[APSS:INCLUDES]->(PSS) {"test": "ABC"}
