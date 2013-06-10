@@ -28,8 +28,13 @@ function NodeCreateCtrl($scope, $location, $filter, Node) {
     }
 }
 
-function BoatsController($scope, Cypher) {
+function BoatsController($scope, $routeParams, Cypher, Finder) {
     $scope.boats=Cypher.query({}, {"query": "start n=node(*) where has(n.type) and n.type='boat' return n"});
+
+    if ( $routeParams.boatName ) {
+        // TODO: escape the name
+        $scope.selected=Finder.findByProperties({type: 'boat', name: $routeParams.boatName});
+    }
 
     $scope.openNewBoatDialog = function() {
         console.log("opening");
@@ -41,8 +46,15 @@ function BoatsController($scope, Cypher) {
         dialogFade: false
     };
 
+    $scope.createBoat = function() {
+        $scope.selected=Node.create({}, {
+            type: "boat",
+            name: $scope.name
+        });
+        $scope.newBoatDialog=false;
+    }
+
     $scope.closeNewBoatDialog = function() {
-        console.log("closing");
         $scope.newBoatDialog=false;
     }
 }

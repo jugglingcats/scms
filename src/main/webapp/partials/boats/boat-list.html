@@ -13,7 +13,7 @@
                 <ul class="nav nav-list">
                     <li class="active"><a href="#">Link</a></li>
                     <li ng-repeat="boat in boats | filter:query">
-                        <a href="{{boat.name}}">{{boat}}</a>
+                        <a href="#/boats/{{boat.data.name}}">{{boat.data.name}}</a>
                     </li>
                 </ul>
                 <div>&nbsp;</div>
@@ -32,70 +32,14 @@
 
                 <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
             </div>
+
             <div class="row-fluid">
-                <div class="span4">
-                    <h2>Heading</h2>
-
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
-                        mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
-                        magna mollis euismod. Donec sed odio dui. </p>
-
-                    <p><a class="btn" href="#">View details &raquo;</a></p>
+                <div ng-hide="selected">
+                    Please select a boat from the left-hand menu.
                 </div>
-                <!--/span-->
-                <div class="span4">
-                    <h2>Heading</h2>
-
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
-                        mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
-                        magna mollis euismod. Donec sed odio dui. </p>
-
-                    <p><a class="btn" href="#">View details &raquo;</a></p>
+                <div ng-show="selected">
+                    {{selected.data.name}}
                 </div>
-                <!--/span-->
-                <div class="span4">
-                    <h2>Heading</h2>
-
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
-                        mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
-                        magna mollis euismod. Donec sed odio dui. </p>
-
-                    <p><a class="btn" href="#">View details &raquo;</a></p>
-                </div>
-                <!--/span-->
-            </div>
-            <!--/row-->
-            <div class="row-fluid">
-                <div class="span4">
-                    <h2>Heading</h2>
-
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
-                        mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
-                        magna mollis euismod. Donec sed odio dui. </p>
-
-                    <p><a class="btn" href="#">View details &raquo;</a></p>
-                </div>
-                <!--/span-->
-                <div class="span4">
-                    <h2>Heading</h2>
-
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
-                        mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
-                        magna mollis euismod. Donec sed odio dui. </p>
-
-                    <p><a class="btn" href="#">View details &raquo;</a></p>
-                </div>
-                <!--/span-->
-                <div class="span4">
-                    <h2>Heading</h2>
-
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
-                        mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada
-                        magna mollis euismod. Donec sed odio dui. </p>
-
-                    <p><a class="btn" href="#">View details &raquo;</a></p>
-                </div>
-                <!--/span-->
             </div>
             <!--/row-->
         </div>
@@ -115,11 +59,11 @@
         </div>
         <div class="modal-body">
             <ul>
-                Enter Boat Name: <input type="text"/>
+                Enter Boat Name: <input type="text" ng-model="name"/>
             </ul>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-success">Save</button>
+            <button class="btn btn-success" ng-click="createBoat()">Save</button>
             <button class="btn cancel" ng-click="closeNewBoatDialog()">Cancel</button>
         </div>
     </div>
