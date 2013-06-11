@@ -28,8 +28,15 @@ function NodeCreateCtrl($scope, $location, $filter, Node) {
     }
 }
 
-function BoatsController($scope, $routeParams, Cypher, Finder) {
+function BoatsController($scope, $routeParams, $location, Cypher, Finder) {
+    console.log("Querying for boats...")
     $scope.boats=Cypher.query({}, {"query": "start n=node(*) where has(n.type) and n.type='boat' return n"});
+
+//    $scope.$on('$routeUpdate', function(value) {
+//        $scope.params = $routeParams;
+//    });
+
+    console.log("search: "+JSON.stringify($location.search()));
 
     if ( $routeParams.boatName ) {
         // TODO: escape the name
