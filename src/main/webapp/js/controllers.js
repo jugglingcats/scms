@@ -47,7 +47,8 @@ function BoatsController($scope, $routeParams, Cypher, Finder) {
     };
 
     $scope.createBoat = function() {
-        $scope.selected=Node.create({}, {
+        console.log(Node);
+        $scope.selected=Node.save({}, {
             type: "boat",
             name: $scope.name
         });
