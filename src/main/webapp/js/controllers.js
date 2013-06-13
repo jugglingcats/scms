@@ -28,23 +28,29 @@ function NodeCreateCtrl($scope, $location, $filter, Node) {
     }
 }
 
-function TestController($scope, $routeParams, $location, Cypher, Finder) {
-    console.log("controller created");
+function TestController($scope, $routeParams) {
+    console.log("got it");
+    $scope.name="xyz";
 }
 
 function BoatsController($scope, $routeParams, $location, Cypher, Finder) {
-    console.log("search: "+JSON.stringify($location.search()));
-
+    function update() {
+        var name=$routeParams.boatName;
+        if ( name != $scope.selectedName ) {
+            $scope.selectedName=name;
+            if ( name && name.length > 0 )
+                $scope.selected=Finder.findByProperties({type: 'boat', name: name});
+        }
+    }
     $scope.boats=Cypher.query({}, {"query": "start n=node(*) where has(n.type) and n.type='boat' return n"});
 
-//    $scope.$on('$routeUpdate', function(value) {
-//        $scope.params = $routeParams;
-//    });
+    $scope.selectedName=null;
 
-//    if ( $routeParams.boatName ) {
-//        // TODO: escape the name
-//        $scope.selected=Finder.findByProperties({type: 'boat', name: $routeParams.boatName});
-//    }
+    $scope.$on('$routeUpdate', function(value) {
+        update();
+    });
+
+    update();
 
     $scope.openNewBoatDialog = function() {
         console.log("opening");

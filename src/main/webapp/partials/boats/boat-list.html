@@ -13,7 +13,7 @@
                 <ul class="nav nav-list">
                     <li class="active"><a href="#">Link</a></li>
                     <li ng-repeat="boat in boats | filter:query">
-                        <a href="#/boats?boatName={{boat.data.name}}">{{boat.data.name}}</a>
+                        <a href="#/boats/?boatName={{boat.data.name}}">{{boat.data.name}}</a>
                     </li>
                 </ul>
                 <div>&nbsp;</div>
