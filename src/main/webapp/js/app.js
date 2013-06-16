@@ -11,4 +11,28 @@ angular.module('scms', ['nodeFilters', 'rmsServices', 'ui.bootstrap']).
             when('/node/:nodeId', {templateUrl: 'partials/node-detail.html', controller: NodeDetailCtrl}).
             when('/new', {templateUrl: 'partials/node-create.html', controller: NodeCreateCtrl}).
             otherwise({redirectTo: '/all'});
-    }]);
+    }]).
+    directive('xeditable', function ($timeout) {
+        return {
+            restrict: 'A',
+            require: "ngModel",
+            link: function (scope, element, attrs, ngModel) {
+                var loadXeditable = function () {
+                    console.log("xeditable loading...");
+                    angular.element(element).editable({
+                        display: function (value, srcData) {
+                            ngModel.$setViewValue(value);
+
+                            // Added date check
+                            if (!(value instanceof Date)) element.html(value);
+
+                            scope.$apply();
+                        }
+                    });
+                }
+                $timeout(function () {
+                    loadXeditable();
+                }, 10);
+            }
+        };
+    });;
