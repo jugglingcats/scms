@@ -33,7 +33,7 @@ function TestController($scope, $routeParams) {
     $scope.name="xyz";
 }
 
-function BoatsController($scope, $routeParams, $location, Cypher, Finder) {
+function BoatsController($scope, $routeParams, $location, $timeout, Cypher, Finder) {
     function update() {
         var name=$routeParams.boatName;
         if ( name != $scope.selectedName ) {

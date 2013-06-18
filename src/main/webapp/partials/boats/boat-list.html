@@ -38,12 +38,20 @@
                     Please select a boat from the left-hand menu.
                 </div>
                 <div ng-show="selected">
+                    Current boat name: {{selected.data.name}}
                     <div class="controls">
                         <a xeditable href="javascript:;" id="boat-name" data-type="text" data-name="boat-name"
-                           data-ng-model="name" data-placement="right" data-placeholder="Required" data-showbuttons="true"
+                           data-ng-model="selected.data.name" data-placement="right" data-placeholder="{{selected.data.name}}" data-showbuttons="true"
                            data-original-title="Enter boat name" class="editable editable-click">{{selected.data.name}}</a>
                     </div>
+                    <!--<div class="controls">-->
+                        <!--<a xeditable href="javascript:;" id="test" data-type="text" data-name="text"-->
+                           <!--data-ng-model="test" data-placement="right" data-placeholder="Required" data-showbuttons="true"-->
+                           <!--data-original-title="Enter boat name" class="editable editable-click">{{test}}</a>-->
+                    <!--</div>-->
                 </div>
+                <div>{{selected.data.name}}</div>
+                <div><input type="text" ng-model="selected.data.name"></div>
             </div>
             <!--/row-->
         </div>

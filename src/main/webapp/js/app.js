@@ -17,8 +17,9 @@ angular.module('scms', ['nodeFilters', 'rmsServices', 'ui.bootstrap']).
             restrict: 'A',
             require: "ngModel",
             link: function (scope, element, attrs, ngModel) {
+                var disableApply=false;
+
                 var loadXeditable = function () {
-                    console.log("xeditable loading...");
                     angular.element(element).editable({
                         display: function (value, srcData) {
                             ngModel.$setViewValue(value);
@@ -26,10 +27,22 @@ angular.module('scms', ['nodeFilters', 'rmsServices', 'ui.bootstrap']).
                             // Added date check
                             if (!(value instanceof Date)) element.html(value);
 
-                            scope.$apply();
+                            if ( !disableApply ) {
+                                scope.$apply();
+                            }
                         }
                     });
                 }
+                scope.$watch(function(scope) {
+                    return ngModel.$viewValue;
+                }, function(newval) {
+                    if ( !newval )
+                        return;
+
+                    disableApply=true;
+                    $(element).editable("setValue", newval);
+                    disableApply=false;
+                });
                 $timeout(function () {
                     loadXeditable();
                 }, 10);
